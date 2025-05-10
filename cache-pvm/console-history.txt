@@ -1,4 +1,0 @@
-quit
-exit()
-exit
-const accounts = await ethers.getSigners()// To see all accountsaccounts.forEach(async (account, i) => {    console.log(`Account ${i}: ${await account.getAddress()}`)})

@@ -1,45 +1,166 @@
-# Sample Polkadot Hardhat Project for EthLisbon
+# Hardhat Lending System Example
 
-This project demonstrates how to use Hardhat with Polkadot. It comes with a few sample contracts, Hardhat Ignition modules that deploy the contract and binaries needed for local deployment.
+A lending system implemented using Solidity smart contracts for Ethereum and Polkadot's Westend Asset Hub using PolkaVM.
 
-1) All binaries are in the `binaries` folder. Be sure to update the path of the binaries in the `hardhat.config.ts` file.
+## Features
 
-2) Time is returned in milliseconds in Polkadot. See the ignition module `Lock.ts`.
+1. Lending Pool Management
+   - Deposit and withdraw assets
+   - Collateral management
+   - Liquidation handling
 
-3) Commands to start a fresh project:
+2. Variable Total Liquidity (VTL) Matching
+   - Lenders specify VTL range (e.g., 1.3-1.6)
+   - Borrowers specify VTL range (e.g., 1.4-1.8)
+   - Efficient matching algorithm in Solidity
 
+3. Collateral Management
+   - Minimum collateral ratio: 1.4x
+   - Liquidation threshold: 1.6x
+   - Oracle-based price feeds
+   - Automated liquidation process
+
+
+Install Node.js (i.e. v22.14.0)
+
+
+1. Install Dependencies:
 ```bash
-mkdir hardhat-example
-cd hardhat-example
-npm init -y
-npm install -D @parity/hardhat-polkadot
-npx hardhat-polkadot init
-```
+# Clear old dependencies
+rm -rf node_modules
 
-Then configure the hardhat config as per documentation (linked below).
-
-
-4) Commands to run the project:
-
-```bash
-git clone git@github.com:UtkarshBhardwaj007/hardhat-polkadot-example.git
+# Install JavaScript dependencies
 npm install
-npx hardhat vars set WESTEND_HUB_PK (your westend asset hub private key)
-npx hardhat compile
-npx hardhat ignition deploy ./ignition/modules/MyToken.ts --network westendAssetHub
 ```
 
-1) Resources:
-- [Polkadot Smart Contracts Documentation](https://papermoonio.github.io/polkadot-mkdocs/develop/smart-contracts/)
-- [Polkadot Smart Contracts Tutorial](https://papermoonio.github.io/polkadot-mkdocs/tutorials/smart-contracts/)
-- [Polkadot Smart Contract Basics](https://papermoonio.github.io/polkadot-mkdocs/polkadot-protocol/smart-contract-basics/)
-- [Hardhat-Polkadot Plugin](https://github.com/paritytech/hardhat-polkadot/tree/main/packages/hardhat-polkadot)
-- [SubScan Block Explorer for Asset Hub Westend](https://assethub-westend.subscan.io/)
-- [Remix for Polkadot](https://remix.polkadot.io/)
-- [Old Smart Contract Docs](https://contracts.polkadot.io/)
+2. Resolc binary for WASM compilation:
+   - Download the latest resolc binary from [Revive releases](https://github.com/paritytech/revive/releases)
+   - For macOS: Download `resolc-universal-apple-darwin`
+   - For Linux: Download `resolc-x86_64-unknown-linux-musl`
+   - For Windows: Download `resolc-x86_64-pc-windows-msvc.exe`
+   - Place the binary in the `binaries` folder and rename it to `resolc`
+   - For macOS users: Run `xattr -c binaries/resolc && chmod +x binaries/resolc`
 
-1) Support Channels:
-- [Discord](https://discord.gg/polkadot)
-- [Stack Exchange](https://substrate.meta.stackexchange.com/)
-- [Telegram](https://t.me/substratedevs)
-- [Reddit](https://www.reddit.com/r/Polkadot/)
+```bash
+curl -L https://github.com/paritytech/revive/releases/download/v0.1.0-dev.16/resolc-universal-apple-darwin -o binaries/resolc && xattr -c binaries/resolc && chmod +x binaries/resolc
+```
+
+3. Solc binary
+
+```bash
+./scripts/download-solc.sh
+```
+
+4. Configure Environment:
+Run `cp .env.example .env` and then modify the `.env` file with the following variables:
+```
+# Ethereum Configuration
+PRIVATE_KEY=your_ethereum_private_key
+SEPOLIA_URL=your_sepolia_rpc_url
+ETHERSCAN_API_KEY=your_etherscan_api_key  # Optional, for contract verification
+
+# Westend Asset Hub Configuration
+WESTEND_HUB_PK=your_westend_private_key  # Private key in hex format (with or without 0x prefix)
+WESTEND_WRAPPED_TOKEN_ADDRESS=            # Will be set after deploying WrappedToken
+```
+
+5. PolkaVM binaries should be in the `binaries` directory from the documentation
+
+6. Deploy Contracts:
+
+```bash
+# Clear cache
+rm -rf cache-pvm artifacts-pvm
+```
+
+```bash
+# Compile contracts
+npx hardhat compile
+
+# Compile contracts to WASM for Westend Asset Hub
+npx hardhat compile:wasm
+
+# First, deploy the wrapped token to Westend Asset Hub
+npx hardhat run scripts/deploy-wrapped-token.ts --network westendAssetHub
+
+# The script will:
+# - Deploy the contract using PolkaVM
+# - Save the contract address to deployments/wrapped-token.json
+
+# Add the deployed address to your .env file:
+WESTEND_WRAPPED_TOKEN_ADDRESS=<address_from_wrapped_token_json>
+
+# Then deploy the lending contracts to Westend Asset Hub
+npx hardhat run scripts/deploy-polkadot.ts --network westendAssetHub
+
+# To deploy to Ethereum (optional)
+npx hardhat run scripts/deploy-ethereum.ts --network sepolia
+```
+
+
+## Network Configuration
+
+
+### Westend Asset Hub
+- RPC URL: https://westend-asset-hub-eth-rpc.polkadot.io
+- Chain ID: 420420421
+- Currency Symbol: WND
+- Block Explorer: https://blockscout-asset-hub.parity-chains-scw.parity.io
+
+
+You can get test WND tokens from the [Westend Faucet](https://faucet.westend.network).
+
+## Contract Architecture
+
+
+1. `LendingPool.sol` (Ethereum)
+   - Manages deposits and collateral
+   - Handles liquidations
+   - Tracks lender and borrower positions
+
+
+2. `LendingPoolBridge.sol` (Both networks)
+   - Implements matching logic
+   - Manages VTL ranges
+   - Handles cross-chain communication
+
+
+3. `WrappedToken.sol` (Westend Asset Hub)
+   - ERC20 token for cross-chain asset representation
+   - Deployed using PolkaVM for Westend compatibility
+
+
+## Development
+
+### Local Development
+```bash
+# Start local hardhat node with PolkaVM
+npx hardhat node
+
+# Deploy to local network
+npx hardhat run scripts/deploy.ts --network localNode
+```
+
+
+### Testing
+```bash
+# Run contract tests
+npx hardhat test
+```
+
+
+### Troubleshooting
+
+1. PolkaVM Setup
+   - Ensure the eth-rpc adapter binary is in the correct location
+   - Check that @parity/hardhat-polkadot is installed
+   - Verify hardhat.config.ts has polkavm settings
+
+2. Deployment Issues
+   - Confirm you have sufficient WND tokens
+   - Check that your private key is correctly set in .env
+   - Verify network configuration in hardhat.config.ts
+
+## License
+
+MIT

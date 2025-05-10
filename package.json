@@ -4,14 +4,41 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "hardhat compile",
+    "compile:wasm": "hardhat compile:wasm",
+    "deploy:eth": "hardhat run scripts/deploy-ethereum.ts --network sepolia",
+    "deploy:westend": "hardhat run scripts/deploy-polkadot.ts --network westendAssetHub",
+    "deploy:wrapped": "ts-node scripts/deploy-wrapped-token.ts",
+    "deploy": "npm run deploy:eth && npm run deploy:westend",
+    "test": "hardhat test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "@parity/hardhat-polkadot": "^0.1.4"
+    "@nomicfoundation/hardhat-chai-matchers": "2.0.0",
+    "@nomicfoundation/hardhat-ethers": "3.0.0",
+    "@nomicfoundation/hardhat-ignition": "0.13.0",
+    "@nomicfoundation/hardhat-network-helpers": "1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "4.0.0",
+    "@nomicfoundation/hardhat-verify": "2.0.1",
+    "@typechain/ethers-v6": "0.5.0",
+    "@typechain/hardhat": "9.0.0",
+    "@types/chai": "4.2.0",
+    "@types/mocha": "9.1.0",
+    "@types/node": "20.11.0",
+    "chai": "4.2.0",
+    "dotenv": "16.3.1",
+    "ethers": "6.9.0",
+    "hardhat": "2.19.1",
+    "hardhat-gas-reporter": "1.0.8",
+    "solidity-coverage": "0.8.1",
+    "ts-node": "10.9.1",
+    "typechain": "8.3.1",
+    "typescript": "5.3.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.0.0"
   }
 }

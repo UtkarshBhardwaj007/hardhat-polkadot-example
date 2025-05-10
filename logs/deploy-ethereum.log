@@ -1,0 +1,34 @@
+Deploying contracts with the account: 0x83De04f1aad8ABF1883166B14A29c084b7B8AB59
+PriceOracle deployed to: 0x20FCEa3d2a333072C2ee6075b1b50391B51AF59f
+MockERC20 deployed to: 0x22C00212d4056c8abBE5fe202972Ce14e1D42903
+LendingPool deployed to: 0x9a35beF196bAF508210270e0A9bB497a797f8bc8
+LendingPoolBridge deployed to: 0x923b9D6B3396D6F8e2BAc017BB356073d588B370
+LendingPool ownership transferred to LendingPoolBridge
+Verifying contracts on Etherscan...
+Successfully submitted source code for contract
+contracts/PriceOracle.sol:PriceOracle at 0x20FCEa3d2a333072C2ee6075b1b50391B51AF59f
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract PriceOracle on the block explorer.
+https://sepolia.etherscan.io/address/0x20FCEa3d2a333072C2ee6075b1b50391B51AF59f#code
+
+Successfully submitted source code for contract
+contracts/test/MockERC20.sol:MockERC20 at 0x22C00212d4056c8abBE5fe202972Ce14e1D42903
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract MockERC20 on the block explorer.
+https://sepolia.etherscan.io/address/0x22C00212d4056c8abBE5fe202972Ce14e1D42903#code
+
+Successfully submitted source code for contract
+contracts/LendingPool.sol:LendingPool at 0x9a35beF196bAF508210270e0A9bB497a797f8bc8
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract LendingPool on the block explorer.
+https://sepolia.etherscan.io/address/0x9a35beF196bAF508210270e0A9bB497a797f8bc8#code
+
+Successfully submitted source code for contract
+contracts/LendingPoolBridge.sol:LendingPoolBridge at 0x923b9D6B3396D6F8e2BAc017BB356073d588B370
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract LendingPoolBridge on the block explorer.
+https://sepolia.etherscan.io/address/0x923b9D6B3396D6F8e2BAc017BB356073d588B370#code
