@@ -1,4 +1,4 @@
-# Sample Polkadot Hardhat Project for EthLisbon
+# Hardhat Boilerplate for Smart Contracts on Polkadot (PassetHub)
 
 This boilerplate project demonstrates how to use Hardhat with Polkadot Hub Testnet. It comes with a few sample contracts, Hardhat Ignition modules that deploy the contract and binaries needed for local deployment and testing. You can use this repository to simply plug in your contracts and compile, test and deploy them.
 
@@ -8,9 +8,7 @@ This boilerplate project demonstrates how to use Hardhat with Polkadot Hub Testn
 
 3) [Create a substrate account using subkey](https://paritytech.github.io/polkadot-sdk/master/subkey/index.html) (if you don't have one already): 
 
-4) Get your private key. If you don't have your private key, you can use your mnemonic phrase to derive it.
-
-[Polkadot-Private-Key-Extractor](https://github.com/UtkarshBhardwaj007/Polkadot-Private-Key-Extractor)
+4) Get your private key. If you don't have your private key, you can use your mnemonic phrase to derive it. [Polkadot-Private-Key-Extractor](https://github.com/UtkarshBhardwaj007/Polkadot-Private-Key-Extractor)
 
 5) Get Some PAS tokens from the [faucet](https://faucet.polkadot.io/?parachain=1111)
 
@@ -52,7 +50,7 @@ Then configure the hardhat config as per documentation (linked below).
 - [BlockScout Block Explorer for PassetHub Testnet](https://blockscout-passet-hub.parity-testnet.parity.io/)
 - [Remix for Polkadot](https://remix.polkadot.io/)
 
-1) Support Channels:
+9) Support Channels:
 - [Discord](https://discord.gg/polkadot)
 - [Element/Matrix](https://matrix.to/#/#substratedevs:matrix.org)
 - [Stack Exchange](https://substrate.meta.stackexchange.com/)
