@@ -74,6 +74,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MyToken__factory>;
     getContractFactory(
+      name: "Storage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Storage__factory>;
+    getContractFactory(
       name: "SupplyChainVerifier",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SupplyChainVerifier__factory>;
@@ -154,6 +158,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.MyToken>;
     getContractAt(
+      name: "Storage",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Storage>;
+    getContractAt(
       name: "SupplyChainVerifier",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -220,6 +229,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
     deployContract(
+      name: "Storage",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Storage>;
+    deployContract(
       name: "SupplyChainVerifier",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.SupplyChainVerifier>;
@@ -299,6 +312,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MyToken>;
+    deployContract(
+      name: "Storage",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Storage>;
     deployContract(
       name: "SupplyChainVerifier",
       args: any[],

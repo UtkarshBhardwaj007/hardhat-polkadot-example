@@ -4,4 +4,5 @@
 export type { Escrow } from "./Escrow";
 export type { Lock } from "./Lock";
 export type { MyToken } from "./MyToken";
+export type { Storage } from "./Storage";
 export type { SupplyChainVerifier } from "./SupplyChainVerifier";

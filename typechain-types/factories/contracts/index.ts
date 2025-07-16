@@ -4,4 +4,5 @@
 export { Escrow__factory } from "./Escrow__factory";
 export { Lock__factory } from "./Lock__factory";
 export { MyToken__factory } from "./MyToken__factory";
+export { Storage__factory } from "./Storage__factory";
 export { SupplyChainVerifier__factory } from "./SupplyChainVerifier__factory";

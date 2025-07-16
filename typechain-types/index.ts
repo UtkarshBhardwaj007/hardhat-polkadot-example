@@ -36,5 +36,7 @@ export type { Lock } from "./contracts/Lock";
 export { Lock__factory } from "./factories/contracts/Lock__factory";
 export type { MyToken } from "./contracts/MyToken";
 export { MyToken__factory } from "./factories/contracts/MyToken__factory";
+export type { Storage } from "./contracts/Storage";
+export { Storage__factory } from "./factories/contracts/Storage__factory";
 export type { SupplyChainVerifier } from "./contracts/SupplyChainVerifier";
 export { SupplyChainVerifier__factory } from "./factories/contracts/SupplyChainVerifier__factory";
