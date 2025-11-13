@@ -37,7 +37,7 @@ const config: HardhatUserConfig = {
         polkadotHubTestnet: {
             polkavm: true,
             url: 'https://testnet-passet-hub-eth-rpc.polkadot.io',
-            accounts: [vars.get('TEST_ACC_PRIVATE_KEY')],
+            accounts: vars.has('TEST_ACC_PRIVATE_KEY') ? [vars.get('TEST_ACC_PRIVATE_KEY')] : [],
         },
     }
 };
